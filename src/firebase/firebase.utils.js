@@ -16,6 +16,47 @@ const config = {
     measurementId: "G-SBSTPEF2R2"
       
 }
+
+/* Let's us take the userAuth obj from the authentication library and store it in our DB.  It's an API request */
+    export const createUserProfileDocument = async (userAuth, additionalData) => {
+        if (!userAuth) return;
+        
+        const userRef = firestore.doc(`users/${userAuth.uid}`)
+
+        const snapShot = await userRef.get();
+        console.log("This is the snapShot:", snapShot);
+
+    /* If the snapshot doesn't exist, we create data in its place */
+        if(!snapShot.exists) {
+            const { displayName, email } = userAuth;
+
+            /* When we invoked the item */
+            const createdAt = new Date();
+
+            try {
+                await userRef.set( {
+                    displayName,
+                    email,
+                    createdAt,
+                    ...additionalData
+                })
+            } catch (error) {
+                console.log('error creating user:', error.message);
+            }
+        }
+
+        return userRef;
+
+        /* console.log(firestore.doc('users/123232shadu')); */
+
+
+        /* query in firestore to see if exists */
+
+    }
+
+
+
+
 /* Let's us initialize firebase */
 firebase.initializeApp(config);
 
