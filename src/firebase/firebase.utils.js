@@ -16,16 +16,17 @@ const config = {
     measurementId: "G-SBSTPEF2R2"
       
 }
-
+/* Let's us initialize firebase */
 firebase.initializeApp(config);
 
+/* export the auth and the db */
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 /* Set up Google authentication utility */
-
+/* Let's us trigger google pop-up for sign in */
 const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters( { propmt: 'select_account'});
+provider.setCustomParameters( { prompt: 'select_account'});
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
