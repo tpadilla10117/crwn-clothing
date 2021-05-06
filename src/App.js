@@ -22,10 +22,29 @@ class App extends React.Component {
   /* Setting the user on state & get user persistence: */
     componentDidMount() {
       /* method from auth library in firebase */
-      this.unsubscribeFromAuth = auth.onAuthStateChanged( async user => {
-        createUserProfileDocument(user);
-        /* this.setState( { currentUser: user}); */
-        console.log("This is my logged in user:", user);
+      this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+        /* if a user actually signs in... */
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
+
+          /* On the snapShot object is where we get the data related to the user we stored if new, or if is already stored in db*/
+          userRef.onSnapshot(snapShot => {
+            this.setState({
+              currentUser: {
+                id: snapShot.id,
+                /* the rest of the data on the object */
+                ...snapShot.data()
+              }
+            
+            }, () => {
+              console.log("Did we get the data?:", this.state)
+            })
+          });
+          
+        } else {
+          /* Equailvalent to setting currentUser to null */
+          this.setState( {currentUser: userAuth});
+        }
       })
     }
 
