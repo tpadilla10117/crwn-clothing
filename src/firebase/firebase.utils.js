@@ -27,12 +27,14 @@ const config = {
         console.log("This is the snapShot:", snapShot);
 
     /* If the snapshot doesn't exist, we create data in its place */
+        /* We want the displayName and email data */
         if(!snapShot.exists) {
             const { displayName, email } = userAuth;
 
-            /* When we invoked the item */
+            /* When we invoked the item at this Date */
             const createdAt = new Date();
 
+            /* We want to make a request and create a new user if there is no data */
             try {
                 await userRef.set( {
                     displayName,
@@ -46,11 +48,6 @@ const config = {
         }
 
         return userRef;
-
-        /* console.log(firestore.doc('users/123232shadu')); */
-
-
-        /* query in firestore to see if exists */
 
     }
 
