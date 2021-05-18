@@ -32,38 +32,6 @@ ______________________________________________________________________________
 
 Project Structure:
 
-├── my-app 
-        ├── node_modules
-        ├── package-lock.json
-        ├── package.json
-        ├── public
-        │   └── favicon.ico
-        │   └── index.html
-        │   └── manifest.json
-        │   └── style.css
-        └── src
-            ├── assets
-            │   ├── css
-            │   │   ├── AboutMe.css
-            │   │   ├── Contact.css
-            │   │   ├── EmailForm.css
-            │   │   ├── Landing.css
-            │   │   ├── Navbar.css
-            │   │   ├── Portfolio.css
-            │   │   ├── Skills.css
-            │   ├── images
-            │   ├── resume
-            ├── components
-            │   ├── ActionPanel.js
-            │   ├── App.js
-            │   ├── Cell.js
-            │   ├── Grid.js
-            │   ├── Header.js
-            │   ├── Palette.js
-            │   
-            ├── utils
-            │   └── index.js
-            └── index.js
 
 
 Public and /src encapsulates the React front-end. /public contains any static files necessary for my front-end, and /src is my React source code.
