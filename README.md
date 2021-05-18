@@ -1,4 +1,4 @@
-# // PROJECT DESCRIPTION
+# PROJECT DESCRIPTION
 A fully functional e-commerce experience where users can purchase clothing products
 
 ## Work In Progress
@@ -26,7 +26,7 @@ ______________________________________________________________________________
 Tech Stack:
 
 Frontend: React.js,
-The root React code starts in the src/index.js file.
+
 
 ______________________________________________________________________________
 
@@ -34,7 +34,7 @@ Project Structure:
 
 
 
-Public and /src encapsulates the React front-end. /public contains any static files necessary for my front-end, and /src is my React source code.
+
 
 ______________________________________________________________________________
 
