@@ -1,42 +1,85 @@
-# PROJECT DESCRIPTION
-A fully functional e-commerce experience where users can purchase clothing products
-
 ## Work In Progress
-### For a pre-alpha version, click the following: https://peaceful-edison-ca2461.netlify.app
+### For a pre-alpha / in-progress version, click the following: https://peaceful-edison-ca2461.netlify.app
 ______________________________________________________________________________
 
-### npm add react-router-dom
+# Project Description:
 
-//
+A fully functional e-commerce experience where users can purchase clothing products
+
+Users Will (Can):
+- 
+- 
+- 
+
+## User-Accessible Endpoints:
+- https://peaceful-edison-ca2461.netlify.app
+
+
+### Tech Stack:
+- Database (BaaS): Firebase
+- API: Express.js (our web server that responds to client requests, and returns values from the database)
+- User Interface / FrontEnd: React.js, CSS, SASS
+- Authentication: jsonwebtoken, jwt-express
+- Package Managers: npm
+
+## Getting Started Locally:
+
+Local Installations:
+
+### `npm i morgan` -> for logging middleware
+### `npm i dotenv` -> for .env
+### `npm i nodemon`
+### `npm add firebase` -> our backend for authentication
+
+In the post-integation/post-integration directory, you can run:
+
+### `npm start` - Starts up the express web-server
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### `db:build` - Seeds the database
+
+## Directory:
+
+  ├── node_modules  
+  ├── public
+  ├── src
+  │   ├── api
+  │   │   ├── index.js
+  │   │   ├── posts.js
+  │   │   ├── tags.js
+  │   │   ├── users.js
+  │   │   ├── utils.js
+  │   │   └── xutils.js
+  │   ├── db
+  │   │   ├── index.js
+  │   │   └── seed.js
+  │   ├── frontend
+  │   │   ├── feature
+  │   │   ├── App.js
+  │   │   └── index.js
+  ├── env
+  ├── .gitignore
+  ├── index.js
+  ├── Notes.md
+  ├── package-lock.json
+  ├── package.json
+  └── README.md
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
 
-Runs the app in the development mode / development environment.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-______________________________________________________________________________
-Tech Stack:
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Frontend: React.js,
-
-
-______________________________________________________________________________
-
-Project Structure:
-
-
-
-
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ______________________________________________________________________________
 
-Contributor: Trinidad Padilla: https://github.com/tpadilla10117
+Developer: Trinidad Padilla: https://github.com/tpadilla10117
