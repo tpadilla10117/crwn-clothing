@@ -27,7 +27,7 @@ const config = {
         const snapShot = await userRef.get();
         console.log("This is the snapShot:", snapShot);
 
-    /* If the snapshot doesn't exist, we create data in its place */
+    /* If the snapshot doesn't exist, we create data ( a snapshot) in its place */
         /* We want the displayName and email data */
         if(!snapShot.exists) {
             const { displayName, email } = userAuth;
