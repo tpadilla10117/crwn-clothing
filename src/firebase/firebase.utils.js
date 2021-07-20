@@ -2,9 +2,10 @@
 import firebase from 'firebase/app';
 
 /* import authentication and the db */
-import 'firebase/firestore';
+import 'firebase/firestore'; //the db
 import 'firebase/auth';
 
+/* The configuration object: */
 const config = {
     
     apiKey: "AIzaSyCg9vBG10p7l45Fnj0oLwyba-zUdzVSrCU",
@@ -57,8 +58,8 @@ const config = {
 /* Let's us initialize firebase */
 firebase.initializeApp(config);
 
-/* export the auth and the db */
-export const auth = firebase.auth();
+/* Need to export the auth and the db to use them:*/
+export const auth = firebase.auth(); 
 export const firestore = firebase.firestore();
 
 /* Set up Google authentication utility */
