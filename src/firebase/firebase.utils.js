@@ -2,9 +2,10 @@
 import firebase from 'firebase/app';
 
 /* import authentication and the db */
-import 'firebase/firestore';
+import 'firebase/firestore'; //the db
 import 'firebase/auth';
 
+/* The configuration object: */
 const config = {
     
     apiKey: "AIzaSyCg9vBG10p7l45Fnj0oLwyba-zUdzVSrCU",
@@ -26,7 +27,7 @@ const config = {
         const snapShot = await userRef.get();
         console.log("This is the snapShot:", snapShot);
 
-    /* If the snapshot doesn't exist, we create data in its place */
+    /* If the snapshot doesn't exist, we create data ( a snapshot) in its place */
         /* We want the displayName and email data */
         if(!snapShot.exists) {
             const { displayName, email } = userAuth;
@@ -57,8 +58,8 @@ const config = {
 /* Let's us initialize firebase */
 firebase.initializeApp(config);
 
-/* export the auth and the db */
-export const auth = firebase.auth();
+/* Need to export the auth and the db to use them:*/
+export const auth = firebase.auth(); 
 export const firestore = firebase.firestore();
 
 /* Set up Google authentication utility */

@@ -20,6 +20,7 @@ class SignUp extends React.Component {
         }
     }
 
+/* This is the handler for the form submit: */
     handleSubmit = async event => {
         event.preventDefault();
         const { displayName, email, password, confirmPassword } = this.state;
@@ -48,6 +49,7 @@ class SignUp extends React.Component {
         }
     };
 
+/* This handler manages changes in the form: */
     handleChange = event => {
         const { name, value } = event.target;
         this.setState({ [name]: value});
