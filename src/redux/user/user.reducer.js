@@ -5,6 +5,8 @@
         //Reducers have a payload object
         // Have to return state / value you want since reducers receive any actions that fire
 
+import { UserActionTypes } from "./user.types";
+
 const INITIAL_STATE = {
     currentUser: null
 }
@@ -13,7 +15,7 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         //Whenever this action type gets fired )SET_CURRENT_USER...
-        case 'SET_CURRENT_USER':
+        case UserActionTypes.SET_CURRENT_USER:
             //return the state values and update the currentUser payload
             return {
                 ...state,
