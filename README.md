@@ -30,6 +30,7 @@ Local Installations:
 ### `npm i redux` -> for state management
 ### `npm i redux-logger` -> reducer logging middleware in Redux
 ### `npm i react-redux` -> 
+### `npm i reselect` ->
 ### `npm i dotenv` -> for .env
 ### `npm i nodemon`
 ### `npm add firebase` -> our backend for authentication
