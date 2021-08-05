@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'; //higher-order component
+import { createStructuredSelector } from 'reselect';
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 /* Syntax for importing SVG - we tell create react app that we want a react component that renders an SVG, rather than its filename*/
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 import './header.scss';
 
@@ -29,9 +32,9 @@ const Header = ( { currentUser, hidden} ) => (
 );
 
 //Use this to gain access to properties from our redux reducers:
-const mapStateToProps = ( {user: { currentUser }, cart: {hidden}}) => ( {
-    currentUser,
-    hidden
+const mapStateToProps = createStructuredSelector( {
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 })
 
 //connect() is higher-order component that gets access to 1 of 2 functions:
