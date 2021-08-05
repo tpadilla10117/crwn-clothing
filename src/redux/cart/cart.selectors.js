@@ -10,6 +10,14 @@ import { createSelector } from 'reselect';
     //
 //This is a memoized Selector:
 export const selectCartItems = createSelector(
-    [ selectCart ],
-    (cart) => cart.cartItems
+    /* Array of input selectors */
+    [ selectCart ]
+    , (cart) => cart.cartItems
 );
+
+export const selectCartItemsCount = createSelector(
+    [selectCartItems], cartItems => cartItems.reduce(
+        (accumulatedQuantity, cartItem) =>
+            accumulatedQuantity + cartItem.quantity, 0
+    )
+)
