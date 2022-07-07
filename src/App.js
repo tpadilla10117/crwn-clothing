@@ -1,10 +1,10 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepages/homepage.js';
 import ShopPage from './pages/shop/shop.js';
 import CheckoutPage from './pages/checkout/checkout.component.js';
-import Header from './components/header/header.js';
+import Header from './components/header/header.jsx';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.js';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils.js';
 import { connect } from 'react-redux';
@@ -64,13 +64,23 @@ class App extends React.Component {
   render() {
   return (
     <div>
-      <Header /* currentUser={this.state.currentUser} */ />
-      <Switch>
+      {/* <Header  /> */}
+      <Routes>
+        <Route path='/' element={<Header/> } >
+          <Route index element={<HomePage />} />
+        </Route> 
+        
+       
+        <Route path="/shop" element={<ShopPage/>} />
+        <Route path='/checkout' element={<CheckoutPage/>} />
+    
+     {/*  <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path="/shop" component={ShopPage} />
         <Route exact path='/checkout' component={CheckoutPage} />
         <Route exact path='/signin' render={ () => this.props.currentUser ? (<Redirect to='/' />) : <SignInAndSignUpPage/>}  />
-      </Switch>
+      </Switch> */}
+      </Routes>
     </div>
   );
   }

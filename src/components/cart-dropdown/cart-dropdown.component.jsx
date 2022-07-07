@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { connect } from 'react-redux';
 
 import CustomButton from '../custom-button/custom-button';
@@ -27,4 +27,4 @@ const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems
 });
 
-export default withRouter(connect(mapStateToProps)(CartDropdown) );
+export default withRouter(connect(mapStateToProps)(CartDropdown) ); */
