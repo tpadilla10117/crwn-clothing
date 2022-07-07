@@ -5,8 +5,8 @@ import HomePage from './pages/homepages/homepage.js';
 import ShopPage from './pages/shop/shop.js';
 import CheckoutPage from './pages/checkout/checkout.component.js';
 import Header from './components/header/header.jsx';
-import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.js';
-import { auth } from './firebase/firebase.utils.js';
+import Authentication from './pages/authentication/authentication';
+
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector.js';
@@ -24,7 +24,7 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="shop" element={<ShopPage/>} />
           <Route path='checkout' element={<CheckoutPage/>} />
-          <Route path='signIn' element={<SignInAndSignUpPage/>} />
+          <Route path='authentication' element={<Authentication/>} />
         </Route> 
 
       </Routes>
