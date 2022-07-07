@@ -1,9 +1,15 @@
 /* importing firebase utility library */
-import firebase from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 
 /* import authentication and the db */
 import 'firebase/firestore'; //the db
-import 'firebase/auth';
+
+import {
+    getAuth,
+    signInWithRedirect,
+    signInWithPopup,
+    GoogleAuthProvider,
+} from 'firebase/auth';
 
 /* The configuration object: */
 const config = {
@@ -18,55 +24,17 @@ const config = {
       
 }
 
-/* Let's us take the userAuth obj from the authentication library and store it in our DB.  It's an API request */
-    export const createUserProfileDocument = async (userAuth, additionalData) => {
-        if (!userAuth) return;
-        
-        const userRef = firestore.doc(`users/${userAuth.uid}`)
-
-        const snapShot = await userRef.get();
-        console.log("This is the snapShot:", snapShot);
-
-    /* If the snapshot doesn't exist, we create data ( a snapshot) in its place */
-        /* We want the displayName and email data */
-        if(!snapShot.exists) {
-            const { displayName, email } = userAuth;
-
-            /* When we invoked the item at this Date */
-            const createdAt = new Date();
-
-            /* We want to make a request and create a new user if there is no data */
-            try {
-                await userRef.set( {
-                    displayName,
-                    email,
-                    createdAt,
-                    ...additionalData
-                })
-            } catch (error) {
-                console.log('error creating user:', error.message);
-            }
-        }
-
-        return userRef;
-
-    }
-
-
 
 
 /* Let's us initialize firebase */
-firebase.initializeApp(config);
+const firebaseApp = initializeApp(config);
 
 /* Need to export the auth and the db to use them:*/
-export const auth = firebase.auth(); 
-export const firestore = firebase.firestore();
+export const auth = getAuth(); 
 
 /* Set up Google authentication utility */
 /* Let's us trigger google pop-up for sign in */
-const provider = new firebase.auth.GoogleAuthProvider();
+const provider = new GoogleAuthProvider();
 provider.setCustomParameters( { prompt: 'select_account'});
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
-export default firebase;
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
