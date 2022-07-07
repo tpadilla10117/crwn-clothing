@@ -2,7 +2,12 @@
 import { initializeApp } from 'firebase/app';
 
 /* import authentication and the db */
-import 'firebase/firestore'; //the db
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc
+} from 'firebase/firestore'; //the db
 
 import {
     getAuth,
@@ -38,3 +43,34 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters( { prompt: 'select_account'});
 
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
+
+export const db = getFirestore(); //instantiate firestore
+
+export const createUserDocumentFromAuth = async (userAuthenticationObject) => {
+    //Check first for a firestore reference
+    const userDocRef = doc(db, 'users', userAuthenticationObject.uid);
+
+    //get the data for the user from the snapshot object:
+    const userSnapshot = await getDoc(userDocRef);
+
+    if(!userSnapshot.exists() ) {
+        const { displayName, email } = userAuthenticationObject;
+        
+        const createdAt = new Date();
+
+        try {
+            await setDoc(userDocRef, {
+                displayName,
+                email,
+                createdAt
+            })
+        } catch (error) {
+            console.log('error creating a user', error.message);
+        }
+    }
+
+    //if user data exists
+
+
+    return userDocRef;
+};

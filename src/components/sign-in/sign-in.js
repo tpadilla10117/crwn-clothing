@@ -4,14 +4,15 @@ import './sign-in.scss';
 import FormInput from '../form-input/form-input.js';
 import CustomButton from '../custom-button/custom-button';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils.js';
+import { signInWithGoogle, createUserDocumentFromAuth } from '../../firebase/firebase.utils.js';
 
 const SignIn = () => {
 
+/* Takes care of logging in with Google: */
     const logGoogleUser = async () => {
-        const response = await signInWithGoogle();
-        console.log(response);
-    }
+        const {user} = await signInWithGoogle();
+        const userDocRef = await createUserDocumentFromAuth(user);
+    };
     
     return(
         <div className="sign-in">
