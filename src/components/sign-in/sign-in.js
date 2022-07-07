@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './sign-in.scss';
 import FormInput from '../form-input/form-input.js';
 import CustomButton from '../custom-button/custom-button';
 
-import { signInWithGoogle, createUserDocumentFromAuth } from '../../firebase/firebase.utils.js';
+import { 
+    signInWithGoogle, 
+    createUserDocumentFromAuth,
+
+} from '../../firebase/firebase.utils.js';
+import { getRedirectResult } from 'firebase/auth';
 
 const SignIn = () => {
 

@@ -39,10 +39,12 @@ export const auth = getAuth();
 
 /* Set up Google authentication utility */
 /* Let's us trigger google pop-up for sign in */
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters( { prompt: 'select_account'});
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters( { prompt: 'select_account'});
 
-export const signInWithGoogle = () => signInWithPopup(auth, provider);
+export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
+
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore(); //instantiate firestore
 
