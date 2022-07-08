@@ -1,38 +1,55 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+import { UserContext } from '../../contexts/user.context';
 import { Link, Outlet } from 'react-router-dom';
 import { connect } from 'react-redux'; //higher-order component
 import { createStructuredSelector } from 'reselect';
-import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
-import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+/* import CartDropdown from '../cart-dropdown/cart-dropdown.component'; */
+
 /* Syntax for importing SVG - we tell create react app that we want a react component that renders an SVG, rather than its filename*/
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selector';
+import { signOutUser } from '../../firebase/firebase.utils';
 
 import './header.scss';
 
-const Header = ( { currentUser, hidden} ) => (
-    <Fragment>
-        <div className="header">
-            <Link className="logo-container" to="/">
-                <Logo className="logo" />
-            </Link>
-            <div className="nav-links-container">
-                <Link className='nav-link' to='/shop'>SHOP</Link>
-                <Link className="nav-link" to='/shop'>CONTACT</Link>
-                {
-                    currentUser ? <div className="nav-link" onClick={ () => auth.signOut() }>SIGN OUT</div> : <Link className="nav-link" to='/signin'>SIGN IN</Link>
+const Header = ( ) => {
+    const { currentUser, setCurrentUser } = useContext(UserContext);
 
-                }
-                <CartIcon/>
+/* Update Context API to sign out a user: */
+    const signOutHandler = async () => {
+        await signOutUser();
+        setCurrentUser(null);
+    };
+
+    return (
+        <Fragment>
+            <div className="header">
+                <Link className="logo-container" to="/">
+                    <Logo className="logo" />
+                </Link>
+                <div className="nav-links-container">
+                    <Link className='nav-link' to='/shop'>SHOP</Link>
+                    <Link className="nav-link" to='/shop'>CONTACT</Link>
+
+                    {
+                        currentUser ? (
+                            <span className='nav-link' onClick={signOutHandler}>SIGN OUT</span>
+                        )
+
+                        : <Link className="nav-link" to='/authentication'>SIGN IN</Link>
+                    }
+
+                    <CartIcon/>
+                </div>
+                {/* {hidden ? null : <CartDropdown />} */}
+            
             </div>
-            {hidden ? null : <CartDropdown />}
-        
-        </div>
-        <Outlet />
-    </Fragment>
-);
+            <Outlet />
+        </Fragment>
+    )
+};
 
 //Use this to gain access to properties from our redux reducers:
 const mapStateToProps = createStructuredSelector( {
