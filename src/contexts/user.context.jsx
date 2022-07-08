@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import { onAuthStateChangedListener, createUserDocumentFromAuth } from '../firebase/firebase.utils';
 
 // the values you want to access based on what was passed from the Provider component:
 export const UserContext = createContext({
@@ -20,5 +21,20 @@ export const UserContext = createContext({
 export const UserProvider = ({ children }) => {
     const [ currentUser, setCurrentUser ] = useState(null);
     const value = { currentUser, setCurrentUser};
+
+    useEffect( () => {
+        const unsubscribe = onAuthStateChangedListener( (user) => {
+            if(user) {
+                createUserDocumentFromAuth(user);
+            };
+            setCurrentUser(user);
+            console.log('from onAuthStateChangedListener:', user);
+        })
+
+        return unsubscribe;
+
+    }, []);
+
+
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

@@ -15,13 +15,7 @@ import { signOutUser } from '../../firebase/firebase.utils';
 import './header.scss';
 
 const Header = ( ) => {
-    const { currentUser, setCurrentUser } = useContext(UserContext);
-
-/* Update Context API to sign out a user: */
-    const signOutHandler = async () => {
-        await signOutUser();
-        setCurrentUser(null);
-    };
+    const { currentUser } = useContext(UserContext);
 
     return (
         <Fragment>
@@ -35,7 +29,7 @@ const Header = ( ) => {
 
                     {
                         currentUser ? (
-                            <span className='nav-link' onClick={signOutHandler}>SIGN OUT</span>
+                            <span className='nav-link' onClick={signOutUser}>SIGN OUT</span>
                         )
 
                         : <Link className="nav-link" to='/authentication'>SIGN IN</Link>
