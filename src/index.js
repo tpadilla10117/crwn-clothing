@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'; //redux component that gives access to a redux store object
 import store from './redux/store';
 import { UserProvider } from './contexts/user.context';
+import { ProductsProvider } from './contexts/products.context';
 
 import './index.css';
 import App from './App';
@@ -12,7 +13,9 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <ProductsProvider>
+          <App />
+        </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
   </Provider>,
