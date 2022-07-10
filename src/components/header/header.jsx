@@ -1,10 +1,11 @@
 import React, { Fragment, useContext } from 'react';
 import { UserContext } from '../../contexts/user.context';
+import { CartContext } from '../../contexts/cart.context';
 import { Link, Outlet } from 'react-router-dom';
 import { connect } from 'react-redux'; //higher-order component
 import { createStructuredSelector } from 'reselect';
 import CartIcon from '../cart-icon/cart-icon.component';
-/* import CartDropdown from '../cart-dropdown/cart-dropdown.component'; */
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 /* Syntax for importing SVG - we tell create react app that we want a react component that renders an SVG, rather than its filename*/
 import { ReactComponent as Logo } from '../../assets/crown.svg';
@@ -16,6 +17,7 @@ import './header.scss';
 
 const Header = ( ) => {
     const { currentUser } = useContext(UserContext);
+    const { isCartOpen } = useContext(CartContext);
 
     return (
         <Fragment>
@@ -37,7 +39,8 @@ const Header = ( ) => {
 
                     <CartIcon/>
                 </div>
-                {/* {hidden ? null : <CartDropdown />} */}
+            {/* Short Circuit Operator to eval truthiness: */}
+                {isCartOpen && <CartDropdown />}
             
             </div>
             <Outlet />

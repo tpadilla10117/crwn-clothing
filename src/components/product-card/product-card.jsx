@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomButton from '../custom-button/custom-button';
+import './product-card.scss';
 
 
 function ProductCard( { product } ) {
