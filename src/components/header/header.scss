@@ -11,14 +11,14 @@
       padding: 25px;
     }
   
-    .options {
+    .nav-links-container {
       width: 50%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
   
-      .option {
+      .nav-link {
         padding: 10px 15px;
         cursor: pointer;
       }

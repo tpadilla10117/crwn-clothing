@@ -1,32 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { toggleCartHidden } from '../../redux/cart/cart.actions';
+import React, { useContext } from 'react';
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
-import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
-import { createStructuredSelector } from 'reselect';
+import { CartContext } from '../../contexts/cart.context';
 import './cart-icon.styles.scss';
 
-const CartIcon = ( {toggleCartHidden, itemCount}) => (
-    <div className='cart-icon' onClick={toggleCartHidden}>
-        <ShoppingIcon className='shopping-icon' />
-        <span className='item-count'>{itemCount}</span>
-    </div>
-);
+const CartIcon = ( ) => {
 
-const mapDispatchToProps = dispatch => ({
-    toggleCartHidden: () => dispatch(toggleCartHidden() )
-});
+    const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
 
-//The selector -> pulls off small portion of state
+    const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
 
-//We need to use memoization -> if the properties from state are the same as ones being used (value hasnt changed & output not diff), keep the old value and prevent a React re-render
+    return (
+        <div className='cart-icon-container' onClick={toggleIsCartOpen}>
+            <ShoppingIcon className='shopping-icon' />
+            <span className='item-count'>{cartCount}</span>
+        </div>
+    )
+    };
 
-/* Use this to keep track of our cart-icons total number of products in the cart. .reducer() is key */
-const mapStateToProps = createStructuredSelector({
-    itemCount: selectCartItemsCount
-});
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CartIcon);
+
+export default CartIcon;

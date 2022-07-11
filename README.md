@@ -1,89 +1,55 @@
-## Work In Progress
-### For in-progress version, click the following: https://nostalgic-brattain-f129f0.netlify.app/
-______________________________________________________________________________
 
-# Project Description:
+<!-- 1) npm i firebase -->
 
-A fully functional e-commerce experience where users can purchase clothing products
+<!-- 2) Create a folder called 'firebase' to -->
+<!-- 3) In the firebase folder, create a firebase.utils.js file -->
 
-Users Will (Can):
-- 
-- 
-- 
+<!-- 4) Import the 'initializeApp' configuration from 'firebase/app' that allows you to create an instance of firebase and attach it to an instance online in your firebase console -->
 
-## User-Accessible Endpoints:
-- https://peaceful-edison-ca2461.netlify.app
+<!-- 5) Add Firebase to your web app => it generates a package, a 'const firebaseConfig' variable that you paste into your firebase.utils.js -->
 
-
-### Tech Stack:
-- Database (BaaS): Firebase
-- API: Express.js (our web server that responds to client requests, and returns values from the database)
-- User Interface / FrontEnd: React.js, CSS, SASS
-- Authentication: jsonwebtoken, jwt-express
-- Package Managers: npm
-
-## Getting Started Locally:
-
-Local Installations:
-
-### `npm i morgan` -> for logging middleware
-### `npm i redux` -> for state management
-### `npm i redux-logger` -> reducer logging middleware in Redux
-### `npm i react-redux` -> 
-### `npm i reselect` ->
-### `npm i dotenv` -> for .env
-### `npm i nodemon`
-### `npm add firebase` -> our backend for authentication
-
-In the post-integation/post-integration directory, you can run:
-
-### `npm start` - Starts up the express web-server
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `db:build` - Seeds the database
-
-## Directory:
-
-  ├── node_modules  
-  ├── public
-  ├── src
-  │   ├── api
-  │   │   ├── index.js
-  │   │   ├── posts.js
-  │   │   ├── tags.js
-  │   │   ├── users.js
-  │   │   ├── utils.js
-  │   │   └── xutils.js
-  │   ├── db
-  │   │   ├── index.js
-  │   │   └── seed.js
-  │   ├── frontend
-  │   │   ├── feature
-  │   │   ├── App.js
-  │   │   └── index.js
-  ├── env
-  ├── .gitignore
-  ├── index.js
-  ├── Notes.md
-  ├── package-lock.json
-  ├── package.json
-  └── README.md
-
-## Available Scripts
-
-### `npm start`
+<!-- 6) import 'firebase/auth'; -->
+<!-- 7) import {
+    getAuth,
+    signInWithRedirect,
+    signInWithPopup,
+    GoogleAuthProvider
+} from 'firebase/auth';  -->
 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- 8) Initialize a 'provider' variable to make a new GoogleAuthProvider() instance -->
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- 9) Use setCustomParameters to tell your provider how to behave.  E.g. we want to force someone to select an account:
 
-______________________________________________________________________________
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters( { prompt: 'select_account'});
 
-Developer: Trinidad Padilla: https://github.com/tpadilla10117
+ -->
+
+ <!-- 10) Need to export your autehntication
+ 
+ e.g. export const auth = firebase.auth(); 
+
+ OR
+
+ export const auth = getAuth();
+ 
+  -->
+
+  <!-- 11) Export your popup:
+  
+  export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+  OR
+
+  export const signInWithGoogle = () => signInInWithPopup(auth, provider);
+  
+  -->
+
+
+  <!-- 12) Go Back to your application on the Firebase side -> Authentication -> Sign-In -> enable the signin and choose a project support email
+  
+  - save
+  
+   -->
