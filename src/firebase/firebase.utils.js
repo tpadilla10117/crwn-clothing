@@ -6,7 +6,11 @@ import {
     getFirestore,
     doc,
     getDoc,
-    setDoc
+    setDoc,
+    collection,
+    writeBatch,
+    query,
+    getDocs
 } from 'firebase/firestore'; //the db
 
 import {
@@ -51,6 +55,39 @@ export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore(); //instantiate firestore
+
+//Collection method -> creates a collection ref. to create a new collection:
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+
+    //use writeBatch to carry out a transaction in the database:
+    const batch = writeBatch(db);
+
+    //Objects are my categories in the collection:
+    objectsToAdd.forEach( (object) => {
+        const docRef = doc(collectionRef, object.title.toLowerCase());
+        batch.set(docRef, object);
+    });
+
+    await batch.commit();
+    console.log('done');
+};
+
+//Retrieve data from firestore:
+//helpers functions isolate the areas that our app interfaces with
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef);
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+        const { title, items } = docSnapshot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {});
+
+    return categoryMap;
+
+};
 
 export const createUserDocumentFromAuth = async (userAuthenticationObject, additionalInformation = {} ) => {
     if(!userAuthenticationObject) return;
