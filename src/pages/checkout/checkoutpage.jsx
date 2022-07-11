@@ -5,7 +5,7 @@ import './checkoutpage.scss';
 
 function CheckoutPage( ) {
 
-    const { cartItems } = useContext(CartContext);
+    const { cartItems, cartTotal } = useContext(CartContext);
 
     return (
         <div className='checkoutpage-container'>
@@ -37,7 +37,7 @@ function CheckoutPage( ) {
                 })
             }
 
-            <span className='total'>Total: 0</span>
+            <span className='total'>Total: ${cartTotal}</span>
             
         </div>
     )
