@@ -1,11 +1,32 @@
-import React from 'react'
+import React, {useContext} from 'react';
+import { CartContext } from '../../contexts/cart.context';
 
-function CheckoutPage() {
-  return (
-    <div>
-        checkoutpage
-    </div>
-  )
+function CheckoutPage( ) {
+
+    const { cartItems, addItemToCart, removeItemToCart } = useContext(CartContext);
+
+    return (
+        <div>
+            <h1>Checkout Page</h1>
+            <div>
+                {
+                    cartItems.map( (cartItem) => {
+                        const { id, name, quantity} = cartItem;
+                        return (
+                            <div key={id}>
+                                <h2>{name}</h2>
+                                <span>{quantity}</span>
+                                <br />
+                                <span onClick={() => removeItemToCart(cartItem)}>Decrement</span>
+                                <br />
+                                <span onClick={() => addItemToCart(cartItem)}>Increment</span>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    )
 }
 
 export default CheckoutPage;
