@@ -1,20 +1,25 @@
 import React from 'react';
-
-import CollectionItem from '../collection-item/collection-item.js';
+import { Link } from 'react-router-dom';
+import ProductCard from '../product-card/product-card.jsx';
 import './collection-preview.scss';
 
-const CollectionPreview = ( {title, items} ) => (
-    <div className='collection-preview'>
-        <h1 className="title">{title.toUpperCase()}</h1>
-        <div className="preview">
-            {/* Here we filter out 4 items and map out the rets of the items */}
-            {
-                items.filter( (item, idx) => idx < 4).map( item => (
-                    <CollectionItem key={item.id} item={item} />
-                ))
-            }
+const CollectionPreview = ( {title, products} ) => {
+
+    return (
+        <div className='collection-preview-container'>
+            <h2>
+                <Link className='title' to={title}>{title.toUpperCase()}</Link>
+            </h2>
+            <div className='preview'>
+                {
+                    products.filter( (_, index) => index < 4)
+                    .map(( product) =>  
+                        <ProductCard key={product.id} product={product} />
+                    )
+                }
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 export default CollectionPreview;
