@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepages/homepage.js';
@@ -6,14 +6,32 @@ import ShopPage from './pages/shop/shop.js';
 import CheckoutPage from './pages/checkout/checkoutpage';
 import Header from './components/header/header.jsx';
 import Authentication from './pages/authentication/authentication';
-
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector.js';
 import { createStructuredSelector } from 'reselect';
+import {
+  onAuthStateChangedListener,
+  createUserDocumentFromAuth
+} from './firebase/firebase.utils.js';
 
 
 const App = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect( () => {
+    const unsubscribe = onAuthStateChangedListener( (user) => {
+        if(user) {
+            createUserDocumentFromAuth(user);
+        };
+        dispatch(setCurrentUser(user) );
+        console.log('from onAuthStateChangedListener:', user);
+    })
+
+    return unsubscribe;
+
+  }, [dispatch]);
 
   return (
     <div>

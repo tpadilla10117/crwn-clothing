@@ -1,6 +1,8 @@
 import React, { Fragment, useContext } from 'react';
-import { UserContext } from '../../contexts/user.context';
+/* import { UserContext } from '../../contexts/user.context'; */
 import { CartContext } from '../../contexts/cart.context';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 import { Link, Outlet } from 'react-router-dom';
 import { connect } from 'react-redux'; //higher-order component
 import { createStructuredSelector } from 'reselect';
@@ -10,13 +12,16 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 /* Syntax for importing SVG - we tell create react app that we want a react component that renders an SVG, rather than its filename*/
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
-import { selectCurrentUser } from '../../redux/user/user.selector';
 import { signOutUser } from '../../firebase/firebase.utils';
 
 import './header.scss';
 
 const Header = ( ) => {
-    const { currentUser } = useContext(UserContext);
+    const currentUser = useSelector(selectCurrentUser);
+
+//Context API code:
+    /* const { currentUser } = useContext(UserContext); */
+
     const { isCartOpen } = useContext(CartContext);
 
     return (

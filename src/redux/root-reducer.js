@@ -5,9 +5,11 @@
 import { combineReducers } from "redux"; //to combine reducers together in store
 import userReducer from "./user/user.reducer";
 import cartReducer from "./cart/cart.reducer";
+import { categoriesReducer } from "./categories/categories.reducer";
 
 //Where we manage the slices of state (reducers):
 export default combineReducers( {
     user: userReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    categories: categoriesReducer,
 });
