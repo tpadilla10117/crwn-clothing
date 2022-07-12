@@ -1,9 +1,14 @@
-import React, {useContext, Fragment } from 'react';
-import { CategoriesContext } from '../../contexts/categories.context';
+import React, {/* useContext, */ Fragment } from 'react';
+/* import { CategoriesContext } from '../../contexts/categories.context'; */
+import { useSelector } from 'react-redux';
+import { selectCategoriesMap } from '../../redux/categories/categories.selector';
 import CollectionPreview from '../../components/collection-preview/collection-preview';
 
 function CategoriesPreview() {
-    const { categoriesMap } = useContext(CategoriesContext);
+    //ContextAPI Code:
+    /* const { categoriesMap } = useContext(CategoriesContext); */
+
+    const categoriesMap = useSelector(selectCategoriesMap);
 
     return (
         <Fragment>
