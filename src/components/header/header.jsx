@@ -1,28 +1,26 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, /* useContext */ } from 'react';
 /* import { UserContext } from '../../contexts/user.context'; */
-import { CartContext } from '../../contexts/cart.context';
+/* import { CartContext } from '../../contexts/cart.context'; */
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/user/user.selector';
+import { selectIsCartOpen } from '../../redux/cart/cart.selectors';
 import { Link, Outlet } from 'react-router-dom';
-import { connect } from 'react-redux'; //higher-order component
-import { createStructuredSelector } from 'reselect';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 /* Syntax for importing SVG - we tell create react app that we want a react component that renders an SVG, rather than its filename*/
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { signOutUser } from '../../firebase/firebase.utils';
 
 import './header.scss';
 
 const Header = ( ) => {
     const currentUser = useSelector(selectCurrentUser);
+    const isCartOpen = useSelector(selectIsCartOpen);
 
 //Context API code:
     /* const { currentUser } = useContext(UserContext); */
-
-    const { isCartOpen } = useContext(CartContext);
+    /* const { isCartOpen } = useContext(CartContext); */
 
     return (
         <Fragment>
@@ -53,11 +51,4 @@ const Header = ( ) => {
     )
 };
 
-//Use this to gain access to properties from our redux reducers:
-const mapStateToProps = createStructuredSelector( {
-    currentUser: selectCurrentUser,
-    hidden: selectCartHidden
-})
-
-//connect() is higher-order component that gets access to 1 of 2 functions:
-export default connect(mapStateToProps)(Header);
+export default Header;

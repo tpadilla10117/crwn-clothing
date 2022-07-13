@@ -75,17 +75,21 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 
 //Retrieve data from firestore:
 //helpers functions isolate the areas that our app interfaces with
+// *Commented out portion is Context API code:
 export const getCategoriesAndDocuments = async () => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+
+    return querySnapshot.docs.map(docSnapshot => docSnapshot.data() );
+
+    /* const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
         const { title, items } = docSnapshot.data();
         acc[title.toLowerCase()] = items;
         return acc;
     }, {});
 
-    return categoryMap;
+    return categoryMap; */
 
 };
 

@@ -1,35 +1,24 @@
 import { createSelector } from 'reselect';
 
-//Input Selectors:
-    //A function that gets the whole state and only returns a portion of it;
-    const selectCart = state => state.cart;
+const selectCartReducer = (state) => state.cart;
 
+export const selectIsCartOpen = createSelector(
+  [selectCartReducer],
+  (cart) => cart.isCartOpen
+);
 
-
-//Output Selectors:
-    //
-//This is a memoized Selector:
 export const selectCartItems = createSelector(
-    /* Array of input selectors */
-    [ selectCart ]
-    , (cart) => cart.cartItems
+  [selectCartReducer],
+  (cart) => cart.cartItems
 );
 
-export const selectCartHidden = createSelector(
-    [selectCart],
-    cart => cart.hidden
+export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
+  cartItems.reduce(
+    (total, cartItem) => total + cartItem.quantity * cartItem.price,
+    0
+  )
 );
 
-export const selectCartItemsCount = createSelector(
-    [selectCartItems], cartItems => cartItems.reduce(
-        (accumulatedQuantity, cartItem) =>
-            accumulatedQuantity + cartItem.quantity, 0
-    )
-);
-
-export const selectCartTotal = createSelector(
-    [selectCartItems], cartItems => cartItems.reduce(
-        (accumulatedQuantity, cartItem) =>
-            accumulatedQuantity + cartItem.quantity * cartItem.price, 0
-    )
+export const selectCartCount = createSelector([selectCartItems], (cartItems) =>
+  cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
 );

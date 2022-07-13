@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'; //redux component that gives access to a
 import store from './redux/store';
 /* import { UserProvider } from './contexts/user.context'; */
 /* import { CategoriesProvider } from './contexts/categories.context'; */
-import { CartProvider } from './contexts/cart.context';
+/* import { CartProvider } from './contexts/cart.context'; */
 
 import './index.css';
 import App from './App';
@@ -15,9 +15,9 @@ ReactDOM.render(
     <BrowserRouter>
       {/* <UserProvider> */}
         {/* <CategoriesProvider> */}
-          <CartProvider>
+          {/* <CartProvider> */}
             <App />
-          </CartProvider>
+          {/* </CartProvider> */}
         {/* </CategoriesProvider> */}
       {/* </UserProvider> */}
     </BrowserRouter>
