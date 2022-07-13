@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'; //redux component that gives access to a
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
 import  { Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from './stripe/stripe.utils';
 /* import { UserProvider } from './contexts/user.context'; */
 /* import { CategoriesProvider } from './contexts/categories.context'; */
 /* import { CartProvider } from './contexts/cart.context'; */
@@ -19,7 +20,7 @@ ReactDOM.render(
         {/* <UserProvider> */}
           {/* <CategoriesProvider> */}
             {/* <CartProvider> */}
-            <Elements>
+            <Elements stripe={stripePromise}>
               <App />
             </Elements>
             {/* </CartProvider> */}
