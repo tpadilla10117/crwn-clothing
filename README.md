@@ -53,3 +53,10 @@ provider.setCustomParameters( { prompt: 'select_account'});
   - save
   
    -->
+
+
+   <!-- Netlify CLI (Command Line Interface) -->
+   <!-- Takes the place of our dev server -->
+   <!-- Can control Netlify platform through the command line -->
+<!-- npm i -g -->
+<!-- netlify dev  - started a dev server--> 
