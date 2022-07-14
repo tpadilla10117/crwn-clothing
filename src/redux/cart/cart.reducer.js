@@ -1,23 +1,23 @@
 import CartActionTypes from './cart.types';
-import { addItemToCart } from './cart.utils';
 
-const INITIAL_STATE = {
-    hidden: true,
-    cartItems: []
+const CART_INITIAL_STATE = {
+    cartItems: [],
+    isCartOpen: false,
 };
 
-const cartReducer = (state = INITIAL_STATE, action) => {
-    switch (action.type) {
-        case CartActionTypes.TOGGLE_CART_HIDDEN:
+const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {
+    const { type, payload } = action;
+    switch (type) {
+        case CartActionTypes.SET_CART_ITEMS:
             return {
                 ...state,
-                hidden: !state.hidden
+                cartItems: payload,
             };
-        case CartActionTypes.ADD_ITEM:
+        case CartActionTypes.SET_IS_CART_OPEN:
             return {
                 ...state,
-                cartItems: addItemToCart(state.cartItems, action.payload) //Spread in our array values and any additions from payload
-            }
+                isCartOpen: payload,
+            };
         default:
             return state;
     }

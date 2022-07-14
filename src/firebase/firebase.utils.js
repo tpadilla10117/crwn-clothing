@@ -40,7 +40,7 @@ const config = {
 
 
 /* Let's us initialize firebase */
-const firebaseApp = initializeApp(config);
+initializeApp(config);
 
 /* Need to export the auth and the db to use them:*/
 export const auth = getAuth(); 
@@ -75,17 +75,21 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 
 //Retrieve data from firestore:
 //helpers functions isolate the areas that our app interfaces with
+// *Commented out portion is Context API code:
 export const getCategoriesAndDocuments = async () => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+
+    return querySnapshot.docs.map(docSnapshot => docSnapshot.data() );
+
+    /* const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
         const { title, items } = docSnapshot.data();
         acc[title.toLowerCase()] = items;
         return acc;
     }, {});
 
-    return categoryMap;
+    return categoryMap; */
 
 };
 
@@ -137,3 +141,16 @@ export const signOutUser = async () => await signOut(auth);
 // Observers: can hook into a stream of events and trigger based on changes
 // takes two parameters: auth, and some callback everytime the auth state changes
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (userAuth) => {
+          unsubscribe();
+          resolve(userAuth);
+        },
+        reject
+      );
+    });
+  };

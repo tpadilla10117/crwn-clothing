@@ -7,9 +7,9 @@ const BUTTON_TYPES_CLASSES = {
     inverted: 'inverted',
 };
 
-const CustomButton = ( { children, buttonType, ...otherProps }) => (
-    <button className={`button-container ${BUTTON_TYPES_CLASSES[buttonType]}` } {...otherProps}>
-        {children}
+const CustomButton = ( { children, buttonType, isLoading, ...otherProps }) => (
+    <button className={`button-container ${BUTTON_TYPES_CLASSES[buttonType]}` } {...otherProps} disabled={isLoading}>
+        {isLoading ? <div className='spinner-container'></div> : children}
     </button>
 )
 
