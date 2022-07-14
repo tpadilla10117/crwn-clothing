@@ -40,7 +40,7 @@ const config = {
 
 
 /* Let's us initialize firebase */
-const firebaseApp = initializeApp(config);
+initializeApp(config);
 
 /* Need to export the auth and the db to use them:*/
 export const auth = getAuth(); 
@@ -141,3 +141,16 @@ export const signOutUser = async () => await signOut(auth);
 // Observers: can hook into a stream of events and trigger based on changes
 // takes two parameters: auth, and some callback everytime the auth state changes
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (userAuth) => {
+          unsubscribe();
+          resolve(userAuth);
+        },
+        reject
+      );
+    });
+  };
