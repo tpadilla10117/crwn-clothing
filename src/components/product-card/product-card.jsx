@@ -27,7 +27,7 @@ function ProductCard( { product } ) {
                 <span className='price'>{price}</span>
             </div>
 
-            <CustomButton buttonType='inverted' onClick={addProductToCart}>Add to Card</CustomButton>
+            <CustomButton buttonType='inverted' onClick={addProductToCart}>Add to Cart</CustomButton>
             
         </div>
     )
