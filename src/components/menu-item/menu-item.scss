@@ -25,6 +25,10 @@
 
     &.large {
         height: 380px;
+
+        @media screen and (max-width: 800px) {
+            height: 200px;
+        }
     }
 
     /* When we see "&", we refer to the class above and append the additional selector.  Like .menu-tem:first-child in regular CSS */
@@ -70,6 +74,10 @@
             font-weight: lighter;
             font-size: 16px;
         }
+    }
+
+    @media screen and (max-width: 800px) {
+        height: 200px;
     }
 
 
