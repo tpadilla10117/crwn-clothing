@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+//TODO: lazy and Suspense lets me do dynamic imports, which are asynchronous
+//TODO: Need to convert routes to code splitting and lookup each of the methods (lazy, suspense)
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepages/homepage.js';
