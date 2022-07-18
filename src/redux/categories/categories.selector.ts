@@ -1,7 +1,9 @@
 import { createSelector } from 'reselect'; //memoizes selectors
+import { CategoriesState } from './categories.reducer';
+import { CategoryMap } from './categories.type';
 
 //input Selectors: give us parameters we need to determine selector output
-const selectCategoryReducer = (state) => state.categories;
+const selectCategoryReducer = (state): CategoriesState => state.categories;
 
 //memoize the selectCategories:
 export const selectCategories = createSelector(
@@ -13,9 +15,9 @@ export const selectCategories = createSelector(
     //unless the array changes, just use a memoized value instead
 export const selectCategoriesMap = createSelector(
     [selectCategories],
-    (categories) => categories.reduce( (acc, category) => {
+    (categories): CategoryMap => categories.reduce( (acc, category) => {
         const { title, items } = category;
         acc[title.toLowerCase()] = items;
         return acc;
-    }, [])
+    }, {} as CategoryMap)
 ) 
