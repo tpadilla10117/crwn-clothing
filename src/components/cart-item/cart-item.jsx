@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react'; //we use memo to memoize the individual cartItems so they don't get re-rendered
 import './cart-item.styles.scss';
 
-const CartItem = ( { cartItem }) => {
+const CartItem = memo(( { cartItem }) => {
 
     const { name, quantity, imageUrl, price } = cartItem;
 
@@ -14,6 +14,6 @@ const CartItem = ( { cartItem }) => {
             </div>
         </div>
     )
-};
+});
 
 export default CartItem;
