@@ -1,13 +1,12 @@
-//TODO: lazy and Suspense lets me do dynamic imports, which are asynchronous
-//TODO: Need to convert routes to code splitting and lookup each of the methods (lazy, suspense)
 import React, { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import HomePage from './pages/homepages/homepage.js';
-import ShopPage from './pages/shop/shop.js';
-import CheckoutPage from './pages/checkout/checkoutpage';
-import Header from './components/header/header.jsx';
-import Authentication from './pages/authentication/authentication';
+/* import HomePage from './pages/homepages/homepage.js'; */
+/* import ShopPage from './pages/shop/shop.js'; */
+/* import CheckoutPage from './pages/checkout/checkoutpage'; */
+import Spinner from './components/spinner/spinner';
+/* import Header from './components/header/header.jsx'; */
+/* import Authentication from './pages/authentication/authentication'; */
 import { connect, useDispatch } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector.js';
@@ -17,6 +16,12 @@ import {
   createUserDocumentFromAuth
 } from './firebase/firebase.utils.js';
 
+/* Code Splitting my routes & reducing bundle.js: */
+const HomePage = lazy( () => import('./pages/homepages/homepage.js'));
+const Authentication = lazy( () => import('./pages/authentication/authentication'));
+const Header = lazy( () => import('./components/header/header.jsx'));
+const ShopPage = lazy( () => import('./pages/shop/shop.js'));
+const CheckoutPage = lazy( () => import('./pages/checkout/checkoutpage'));
 
 const App = () => {
 
@@ -36,19 +41,18 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div>
-    
-      <Routes>
+      <Suspense fallback={<Spinner />}>
+        <Routes>
 
-        <Route path='/' element={<Header/> } >
-          <Route index element={<HomePage />} />
-          <Route path="shop/*" element={<ShopPage/>} />
-          <Route path='checkout' element={<CheckoutPage/>} />
-          <Route path='authentication' element={<Authentication/>} />
-        </Route> 
+          <Route path='/' element={<Header/> } >
+            <Route index element={<HomePage />} />
+            <Route path="shop/*" element={<ShopPage/>} />
+            <Route path='checkout' element={<CheckoutPage/>} />
+            <Route path='authentication' element={<Authentication/>} />
+          </Route> 
 
-      </Routes>
-    </div>
+        </Routes>
+      </Suspense>
   );
   
 }
