@@ -1,6 +1,13 @@
 //Abstracting away actions:
 import { AnyAction } from "redux"; //an interface with a Redux action of any type
 
+//Type Predicate -> verifies that a specific argument is going to be a specific type
+
+type Matchable<AC extends () => AnyAction> = AC & {
+    type: ReturnType<AC>['type'];
+    match(action: AnyAction): action is ReturnType<AC>;
+}
+
 //Generics with types:
 export type ActionWithPayload<T, P> = {
     type: T;
